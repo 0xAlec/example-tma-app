@@ -14,10 +14,11 @@ import {
   Identity,
   EthBalance,
 } from '@coinbase/onchainkit/identity';
-import WebApp from '@twa-dev/sdk'
+import dynamic from 'next/dynamic';
 
-
-WebApp.ready();
+const AlertButton = dynamic(() => import('./components/Button'), {
+  ssr: false,
+});
 
 export default function App() {
   return (
@@ -53,9 +54,7 @@ export default function App() {
       </header>
 
       <main className="flex-grow flex items-center justify-center">
-      <button onClick={() => WebApp.showAlert(`Hello World!`)}>
-            Show Alert
-        </button>
+        <AlertButton />
       </main>
     </div>
   );

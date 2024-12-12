@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Providers } from './providers';
 // import Script from 'next/script';
+// import WebApp from '@twa-dev/sdk'
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME,

@@ -4,3 +4,5 @@
 /build
 /out
 /public/telegram-web-app.js
+/.next
+next-env.d.ts
