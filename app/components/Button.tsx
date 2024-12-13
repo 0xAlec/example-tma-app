@@ -3,12 +3,11 @@ import { MainButton } from '@twa-dev/sdk/react';
 import { createCoinbaseWalletSDK } from '@coinbase/wallet-sdk';
 
 
-const sdk = new (createCoinbaseWalletSDK({
+const sdk = createCoinbaseWalletSDK({
     appName: 'My Dapp',
     appLogoUrl: 'https://example.com/logo.png',
     appChainIds: [84532],
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-}) as any);
+});
 
 const provider = sdk.getProvider();
 
