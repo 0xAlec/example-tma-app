@@ -9,11 +9,5 @@ WebApp.ready()
 biometricManager.init()
 
 export default function AlertButton() {
-  return <MainButton text="Connect Wallet" onClick={() => biometricManager.authenticate({'reason': 'Authenticate to continue'}, (isAuthenticated) => {
-    if (isAuthenticated) {
-      WebApp.showAlert('Authenticated')
-    } else {
-      WebApp.showAlert('Not Authenticated')
-    }
-  })} />
+  return <MainButton text="Connect Wallet" onClick={() => (WebApp.openLink('https://keys.coinbase.com/connect'))} />
 }
