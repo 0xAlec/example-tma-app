@@ -1,13 +1,21 @@
-
 import WebApp from '@twa-dev/sdk'
 import { MainButton } from '@twa-dev/sdk/react';
+import { createCoinbaseWalletSDK } from '@coinbase/wallet-sdk';
 
 
-const biometricManager = WebApp.BiometricManager
+const sdk = new (createCoinbaseWalletSDK({
+    appName: 'My Dapp',
+    appLogoUrl: 'https://example.com/logo.png',
+    appChainIds: [84532],
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+}) as any);
+
+const provider = sdk.getProvider();
 
 WebApp.ready()
-biometricManager.init()
 
 export default function AlertButton() {
-  return <MainButton text="Connect Wallet" onClick={() => (WebApp.openLink('https://keys.coinbase.com/connect'))} />
+  return <MainButton text="Connect Wallet" onClick={async () => await provider.request({
+    method: 'eth_requestAccounts',
+  })} />
 }
