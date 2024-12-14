@@ -1,6 +1,11 @@
 // import WebApp from '@twa-dev/sdk';
 // import sdk from '@farcaster/frame-sdk';
-import { init, retrieveLaunchParams, miniApp } from '@telegram-apps/sdk';
+import {
+  init,
+  retrieveLaunchParams,
+  miniApp,
+  openLink,
+} from '@telegram-apps/sdk';
 
 export class MiniSDK {
   private platform: 'telegram' | 'frame' | 'unknown';
@@ -38,6 +43,15 @@ export class MiniSDK {
     if (this.platform === 'telegram') {
       const { initData } = retrieveLaunchParams();
       return initData?.user;
+    }
+  }
+
+  // Open a link in the browser
+  public OpenLink(url: string) {
+    if (this.platform === 'telegram') {
+      openLink(url, {
+        tryBrowser: 'chrome',
+      });
     }
   }
 }

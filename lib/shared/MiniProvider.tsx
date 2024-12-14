@@ -5,6 +5,7 @@ import type { User } from '@telegram-apps/sdk';
 type MiniSDKContextType = {
     user: User | undefined;
     platform: string | undefined;
+    openLink: (url: string) => void;
 }
 
 export const MiniSDKContext = createContext<MiniSDKContextType | null>(null)
@@ -22,7 +23,8 @@ const sdk = new MiniSDK();
 export function MiniProvider({ children }: { children: React.ReactNode }) {
     const value = useMemo(() => ({
         user: sdk.GetUserFromContext(),
-        platform: sdk.GetPlatform()
+        platform: sdk.GetPlatform(),
+        openLink: sdk.OpenLink
     }), [])
 
     return <MiniSDKContext.Provider value={value}>{children}</MiniSDKContext.Provider>

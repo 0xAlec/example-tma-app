@@ -2,20 +2,20 @@
 
 import dynamic from 'next/dynamic';
 
-const AlertButton = dynamic(() => import('./components/Button'), {
+const User = dynamic(() => import('./components/User'), {
   ssr: false,
 });
 
-const User = dynamic(() => import('./components/User'), {
+const ConnectWalletButton = dynamic(() => import('@lib/shared/Button'), {
   ssr: false,
 });
 
 export default function App() {
   return (
     <div className="flex flex-col min-h-screen font-sans dark:bg-background dark:text-white bg-white text-black">
-      <main className="flex-grow flex items-center justify-center">
-        <AlertButton />
+      <main className="flex-grow flex flex-col items-center justify-center">
         <User />
+        <ConnectWalletButton />
       </main>
     </div>
   );
