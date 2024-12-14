@@ -6,6 +6,10 @@ import {
   miniApp,
   openLink,
 } from '@telegram-apps/sdk';
+import eruda from 'eruda';
+
+eruda.init();
+const console = eruda.get('console');
 
 export class MiniSDK {
   private platform: 'telegram' | 'frame' | 'unknown';
@@ -49,8 +53,8 @@ export class MiniSDK {
 
   // Open a link in the browser
   public OpenLink(url: string) {
-    console.log('debug', this.GetPlatform(), openLink.isAvailable());
-    if (this.GetPlatform() === 'telegram' && openLink.isAvailable()) {
+    console.log(this.platform, openLink.isAvailable());
+    if (this.platform === 'telegram' && openLink.isAvailable()) {
       openLink(url, {
         tryBrowser: 'chrome',
       });
