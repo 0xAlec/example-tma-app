@@ -1,21 +1,18 @@
 'use client';
 
-import { base } from 'wagmi/chains';
-import { OnchainKitProvider } from '@coinbase/onchainkit';
 import type { ReactNode } from 'react';
+import dynamic from 'next/dynamic';
+
+const MiniProvider = dynamic(
+  () => import('@lib/shared/MiniProvider').then(mod => ({ default: mod.MiniProvider })),
+  { ssr: false }
+);
 
 export function Providers(props: { children: ReactNode }) {
   return (
-    <OnchainKitProvider
-      apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
-          chain={base}
-          config={{ appearance: { 
-            mode: 'auto',
-        }
-      }}
-    >
-      {props.children}
-    </OnchainKitProvider>
+    <MiniProvider>
+        {props.children}
+    </MiniProvider>
   );
 }
 
