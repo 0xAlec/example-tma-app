@@ -48,8 +48,8 @@ export class MiniSDK {
 
   // Open a link in the browser
   public OpenLink(url: string) {
-    if (this.platform === 'telegram') {
-      openLink(url, {
+    if (this.platform === 'telegram' && openLink.isAvailable()) {
+      return openLink(url, {
         tryBrowser: 'chrome',
       });
     }
