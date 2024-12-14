@@ -6,11 +6,16 @@ const AlertButton = dynamic(() => import('./components/Button'), {
   ssr: false,
 });
 
+const User = dynamic(() => import('./components/User'), {
+  ssr: false,
+});
+
 export default function App() {
   return (
     <div className="flex flex-col min-h-screen font-sans dark:bg-background dark:text-white bg-white text-black">
       <main className="flex-grow flex items-center justify-center">
         <AlertButton />
+        <User />
       </main>
     </div>
   );
