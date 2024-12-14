@@ -4,7 +4,15 @@ export default function User() {
     const { user, platform } = useMiniContext();
     
     return <div>
-        <p>{user ? user.username : 'No user found'}</p>
-        <p>{platform}</p>
+        <pre>
+            {JSON.stringify(
+                {
+                    user: user || null,
+                    platform: platform
+                },
+                null,
+                2
+            )}
+        </pre>
     </div>
 }
