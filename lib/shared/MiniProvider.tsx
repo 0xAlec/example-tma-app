@@ -1,6 +1,7 @@
 import { MiniSDK } from "./sdk"
 import { createContext, useContext, useMemo } from 'react'
 import type { User } from '@telegram-apps/sdk';
+import eruda from 'eruda'
 
 type MiniSDKContextType = {
     user: User | undefined;
@@ -19,6 +20,7 @@ export function useMiniContext() {
 }
 
 const sdk = new MiniSDK();
+eruda.init();
 
 export function MiniProvider({ children }: { children: React.ReactNode }) {
     const value = useMemo(() => ({

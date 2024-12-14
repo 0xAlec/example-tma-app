@@ -24,10 +24,11 @@ export class MiniSDK {
       console.error('Platform is not telegram', err);
       this.platform = 'unknown';
     }
+    this.ready();
   }
 
   // Use this to tell the parent application the platform is ready
-  public Ready() {
+  private ready() {
     if (miniApp.ready.isAvailable()) {
       miniApp.ready();
     }
@@ -48,8 +49,9 @@ export class MiniSDK {
 
   // Open a link in the browser
   public OpenLink(url: string) {
+    console.log(this.platform, openLink.isAvailable());
     if (this.platform === 'telegram' && openLink.isAvailable()) {
-      return openLink(url, {
+      openLink(url, {
         tryBrowser: 'chrome',
       });
     }
