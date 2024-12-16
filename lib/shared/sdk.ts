@@ -10,10 +10,14 @@ import eruda from 'eruda';
 
 eruda.init();
 
+const console = eruda.get('console');
+
 export class MiniSDK {
   private platform: 'telegram' | 'warpcast' | 'unknown' = 'unknown';
 
-  constructor() {
+  constructor() {}
+
+  public async Ready() {
     // Try to initialize Telegram first
     try {
       init();
@@ -32,12 +36,19 @@ export class MiniSDK {
     // Try to initialize Warpcast
     try {
       if (sdk) {
+        const context = await sdk.context;
+
+        if (!context) {
+          throw new Error('No context found');
+        }
         sdk.actions.ready();
         this.platform = 'warpcast';
       }
     } catch (err) {
       console.error('Platform is not warpcast', err);
     }
+
+    console.log('Successfully initialized platform', this.platform);
   }
 
   // Returns the platform name
