@@ -24,17 +24,21 @@ const sdk = new MiniSDK();
 
 export function MiniProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<MiniUser | undefined>(undefined);
+    const [ready, setReady] = useState(false);
 
     useEffect(() => {
         const initialize = async () => {
             await sdk.Ready();
+            setReady(true);
             const user = await sdk.GetUserFromContext();
             if (user) {
                 setUser(user);
             }
         }
-        initialize();
-    }, [user]);
+        if (!ready) {
+            initialize();
+        }
+    }, [user, ready]);
 
     const value = useMemo(() => ({
         platform: sdk.GetPlatform(),
