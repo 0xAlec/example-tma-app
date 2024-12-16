@@ -5,7 +5,7 @@ export default function User() {
     
     return (
         <div className="w-full max-w-screen-lg mx-auto p-4 sm:p-6">
-            <pre className="bg-gray-100 rounded-lg p-4 overflow-x-auto text-sm sm:text-base whitespace-pre-wrap break-words">
+            <pre className="rounded-lg p-4 overflow-x-auto text-sm sm:text-base whitespace-pre-wrap break-words">
                 {JSON.stringify(
                     {
                         user: user || null,
