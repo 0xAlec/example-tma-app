@@ -1,5 +1,5 @@
 // import WebApp from '@twa-dev/sdk';
-// import sdk from '@farcaster/frame-sdk';
+import sdk from '@farcaster/frame-sdk';
 import {
   init,
   retrieveLaunchParams,
@@ -11,29 +11,32 @@ import eruda from 'eruda';
 eruda.init();
 
 export class MiniSDK {
-  private platform: 'telegram' | 'frame' | 'unknown';
+  private platform: 'telegram' | 'warpcast' | 'unknown' = 'unknown';
 
   constructor() {
-    // try request from telegram first
-    // if not, try request from frame
+    // Try to initialize Telegram first
     try {
       init();
       this.platform = 'telegram';
       if (miniApp.mount.isAvailable()) {
         miniApp.mount();
         miniApp.isMounted();
+        if (miniApp.ready.isAvailable()) {
+          miniApp.ready();
+        }
       }
     } catch (err) {
       console.error('Platform is not telegram', err);
-      this.platform = 'unknown';
     }
-    this.ready();
-  }
 
-  // Use this to tell the parent application the platform is ready
-  private ready() {
-    if (miniApp.ready.isAvailable()) {
-      miniApp.ready();
+    // Try to initialize Warpcast
+    try {
+      if (sdk) {
+        sdk.actions.ready();
+        this.platform = 'warpcast';
+      }
+    } catch (err) {
+      console.error('Platform is not warpcast', err);
     }
   }
 
