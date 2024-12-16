@@ -1,10 +1,11 @@
 import { MiniSDK } from "./sdk"
-import { createContext, useContext, useMemo } from 'react'
-import type { User } from '@telegram-apps/sdk';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import type { MiniUser } from './types';
 
 type MiniSDKContextType = {
-    user: User | undefined;
     platform: string | undefined;
+    user: MiniUser | undefined;
+    // getUser: () => Promise<MiniUser | undefined>;
     openLink: (url: string) => void;
 }
 
@@ -21,11 +22,23 @@ export function useMiniContext() {
 const sdk = new MiniSDK();
 
 export function MiniProvider({ children }: { children: React.ReactNode }) {
+    const [user, setUser] = useState<MiniUser | undefined>(undefined);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const user = await sdk.GetUserFromContext();
+            if (user) {
+                setUser(user);
+            }
+        }
+        fetchUser();
+    }, [user]);
+
     const value = useMemo(() => ({
-        user: sdk.GetUserFromContext(),
         platform: sdk.GetPlatform(),
+        user,
         openLink: (url: string) => sdk.OpenLink(url)
-    }), [])
+    }), [user])
 
     return <MiniSDKContext.Provider value={value}>{children}</MiniSDKContext.Provider>
 }

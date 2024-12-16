@@ -46,10 +46,12 @@ export class MiniSDK {
   }
 
   // Returns the user from the context
-  public GetUserFromContext() {
+  public async GetUserFromContext() {
     if (this.platform === 'telegram') {
       const { initData } = retrieveLaunchParams();
       return initData?.user;
+    } else if (this.platform === 'warpcast') {
+      return await sdk.context;
     }
   }
 
