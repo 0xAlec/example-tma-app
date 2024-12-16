@@ -1,6 +1,6 @@
 import { MiniSDK } from "./sdk"
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import OnchainProviders from "./OnchainProviders"
+import PrivyProviders from "./PrivyProvider"
 import type { MiniUser } from './types';
 
 type MiniSDKContextType = {
@@ -48,7 +48,7 @@ export function MiniProvider({ children }: { children: React.ReactNode }) {
 
     return (
         <MiniSDKContext.Provider value={value}>
-            <OnchainProviders>{children}</OnchainProviders>
+            <PrivyProviders>{children}</PrivyProviders>
         </MiniSDKContext.Provider>
     )
 }
