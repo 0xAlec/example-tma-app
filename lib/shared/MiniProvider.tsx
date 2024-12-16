@@ -1,5 +1,6 @@
 import { MiniSDK } from "./sdk"
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import OnchainProviders from "./OnchainProviders"
 import type { MiniUser } from './types';
 
 type MiniSDKContextType = {
@@ -25,13 +26,14 @@ export function MiniProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<MiniUser | undefined>(undefined);
 
     useEffect(() => {
-        const fetchUser = async () => {
+        const initialize = async () => {
+            await sdk.Ready();
             const user = await sdk.GetUserFromContext();
             if (user) {
                 setUser(user);
             }
         }
-        fetchUser();
+        initialize();
     }, [user]);
 
     const value = useMemo(() => ({
@@ -40,5 +42,9 @@ export function MiniProvider({ children }: { children: React.ReactNode }) {
         openLink: (url: string) => sdk.OpenLink(url)
     }), [user])
 
-    return <MiniSDKContext.Provider value={value}>{children}</MiniSDKContext.Provider>
+    return (
+        <MiniSDKContext.Provider value={value}>
+            <OnchainProviders>{children}</OnchainProviders>
+        </MiniSDKContext.Provider>
+    )
 }
