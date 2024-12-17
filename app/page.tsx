@@ -14,6 +14,10 @@ const User = dynamic(() => import('./components/User'), {
   ssr: false,
 });
 
+const Redirect = dynamic(() => import('./components/Redirect'), {
+  ssr: false,
+});
+
 export default function App() {
   return (
     <div className="flex flex-col min-h-screen font-sans dark:bg-background dark:text-white bg-white text-black">
@@ -23,6 +27,8 @@ export default function App() {
         <ConnectWallet />
         <br />
         <Transaction />
+        <br />
+        <Redirect />
       </main>
     </div>
   );
