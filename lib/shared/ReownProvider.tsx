@@ -2,7 +2,7 @@
 
 import { wagmiAdapter, projectId } from '@/lib/config/config'
 import { createAppKit } from '@reown/appkit/react' 
-import { base } from '@reown/appkit/networks'
+import { baseSepolia } from '@reown/appkit/networks'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import React, { type ReactNode } from 'react'
@@ -27,8 +27,8 @@ const metadata = { //this is optional
 createAppKit({
   adapters: [wagmiAdapter],
   projectId,
-  networks: [base],
-  defaultNetwork: base,
+  networks: [baseSepolia],
+  defaultNetwork: baseSepolia,
   metadata: metadata,
   featuredWalletIds: ['fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa'],
   features: {
