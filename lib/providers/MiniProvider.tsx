@@ -48,14 +48,6 @@ export function MiniProvider({ children }: { children: React.ReactNode }) {
         openLink: (url: string) => sdk.OpenLink(url)
     }), [user])
 
-    if (value.platform === 'telegram') {
-        return (
-            <MiniSDKContext.Provider value={value}>
-                <PrivyProviders>{children}</PrivyProviders>
-            </MiniSDKContext.Provider>
-        )
-    }
-
     if (value.platform === 'warpcast') {
         return (
             <MiniSDKContext.Provider value={value}>
@@ -64,5 +56,9 @@ export function MiniProvider({ children }: { children: React.ReactNode }) {
         )
     }
 
-    return null;
+    return (
+        <MiniSDKContext.Provider value={value}>
+            <PrivyProviders>{children}</PrivyProviders>
+        </MiniSDKContext.Provider>
+    )
 }

@@ -1,8 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import PrivyLoginButton from '@/lib/providers/PrivyLogin';
-import PrivyUser from '@/lib/providers/PrivyUser';
+import ConnectWallet from '@/lib/mini/ConnectWallet';
 
 
 const User = dynamic(() => import('./components/User'), {
@@ -15,10 +14,7 @@ export default function App() {
       <main className="flex-grow flex flex-col items-center justify-center">
         <User />
         <br />
-        <PrivyLoginButton />
-        <br />
-        <br />
-        <PrivyUser />
+        <ConnectWallet />
       </main>
     </div>
   );
