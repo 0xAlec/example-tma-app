@@ -3,6 +3,8 @@
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 import { useAccount, useWriteContract } from 'wagmi';
+import { useDisconnect } from '@reown/appkit/react'
+
 
 const User = dynamic(() => import('./components/User'), {
   ssr: false,
@@ -11,7 +13,7 @@ const User = dynamic(() => import('./components/User'), {
 export default function App() {
   const { address } = useAccount()
   const { data, writeContract, status } = useWriteContract()
-
+  const { disconnect } = useDisconnect()
   useEffect(() => {
     if (status === 'success') {
       console.log('Transaction successful')
@@ -25,6 +27,8 @@ export default function App() {
         <User />
         <br />
         <appkit-button />
+        <br />
+        <button onClick={() => disconnect()}>Disconnect</button>
         <br />
         {address && <button 
           onClick={() => {
