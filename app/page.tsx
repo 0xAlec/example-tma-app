@@ -2,9 +2,8 @@
 
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
-import { useWriteContract } from 'wagmi';
-import { useAppKitAccount } from "@reown/appkit/react";
-import { useDisconnect } from '@reown/appkit/react'
+import { useAccount, useWriteContract, useDisconnect } from 'wagmi';
+import ConnectWalletButton from '@/lib/shared/Button';
 
 
 const User = dynamic(() => import('./components/User'), {
@@ -12,9 +11,9 @@ const User = dynamic(() => import('./components/User'), {
 });
 
 export default function App() {
-  const { address } = useAppKitAccount()
-  const { data, writeContract, status } = useWriteContract()
+  const { address } = useAccount()
   const { disconnect } = useDisconnect()
+  const { data, writeContract, status } = useWriteContract()
   useEffect(() => {
     if (status === 'success') {
       console.log('Transaction successful')
@@ -27,7 +26,7 @@ export default function App() {
       <main className="flex-grow flex flex-col items-center justify-center">
         <User />
         <br />
-        <appkit-button />
+        <ConnectWalletButton />
         <br />
         <button onClick={() => disconnect()}>Disconnect</button>
         <br />

@@ -30,7 +30,7 @@ export default function OnchainProviders({ children }: { children: React.ReactNo
             connectors: [
                 coinbaseWallet({
                     appName: 'Mini',
-                    preference: 'smartWalletOnly'
+                    preference: 'eoaOnly'
                 }),
             ],
         }));

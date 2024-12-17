@@ -2,6 +2,7 @@ import { MiniSDK } from "./sdk"
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import ReownProvider from "./ReownProvider"
 import type { MiniUser } from './types';
+import OnchainProviders from "./OnchainProviders";
 
 type MiniSDKContextType = {
     platform: string | undefined;
@@ -48,7 +49,7 @@ export function MiniProvider({ children, cookies }: { children: React.ReactNode,
 
     return (
         <MiniSDKContext.Provider value={value}>
-            <ReownProvider cookies={cookies}>{children}</ReownProvider>
+            <OnchainProviders>{children}</OnchainProviders>
         </MiniSDKContext.Provider>
     )
 }
