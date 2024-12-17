@@ -59,7 +59,7 @@ export function MiniProvider({ children }: { children: React.ReactNode }) {
     if (value.platform === 'telegram') {
         return (
             <MiniSDKContext.Provider value={value}>
-                <PrivyProviders>{children}</PrivyProviders>
+                <OnchainProviders>{children}</OnchainProviders>
             </MiniSDKContext.Provider>
         )
     }
