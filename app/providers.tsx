@@ -8,9 +8,9 @@ const MiniProvider = dynamic(
   { ssr: false }
 );
 
-export function Providers(props: { children: ReactNode, cookies: string | null }) {
+export function Providers(props: { children: ReactNode }) {
   return (
-    <MiniProvider cookies={props.cookies}>
+    <MiniProvider>
         {props.children}
     </MiniProvider>
   );

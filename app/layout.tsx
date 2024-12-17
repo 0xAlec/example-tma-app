@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Providers } from './providers';
 import Script from 'next/script';
-import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME,
@@ -15,7 +14,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookies = headers().get('cookie')
 
   return (
     <html lang="en">
@@ -23,7 +21,7 @@ export default function RootLayout({
         <Script src="https://telegram.org/js/telegram-web-app.js" />
       </head>
       <body className="bg-background dark">
-        <Providers cookies={cookies}>{children}</Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

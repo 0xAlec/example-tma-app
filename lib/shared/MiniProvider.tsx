@@ -24,7 +24,7 @@ export function useMiniContext() {
 
 const sdk = new MiniSDK();
 
-export function MiniProvider({ children, cookies }: { children: React.ReactNode, cookies: string | null }) {
+export function MiniProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<MiniUser | undefined>(undefined);
     const [ready, setReady] = useState(false);
 
@@ -48,9 +48,21 @@ export function MiniProvider({ children, cookies }: { children: React.ReactNode,
         openLink: (url: string) => sdk.OpenLink(url)
     }), [user])
 
-    return (
-        <MiniSDKContext.Provider value={value}>
-            <PrivyProviders>{children}</PrivyProviders>
-        </MiniSDKContext.Provider>
-    )
+    if (value.platform === 'telegram') {
+        return (
+            <MiniSDKContext.Provider value={value}>
+                <PrivyProviders>{children}</PrivyProviders>
+            </MiniSDKContext.Provider>
+        )
+    }
+
+    if (value.platform === 'warpcast') {
+        return (
+            <MiniSDKContext.Provider value={value}>
+                <OnchainProviders>{children}</OnchainProviders>
+            </MiniSDKContext.Provider>
+        )
+    }
+
+    return null;
 }
