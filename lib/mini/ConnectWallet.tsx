@@ -1,5 +1,5 @@
 import { useMiniContext } from "@/lib/providers/MiniProvider";
-import PrivyLoginButton from "../providers/PrivyLogin";
+import TelegramLoginButton from "../telegram/TelegramLoginButton";
 import WarpcastLoginButton from "../warpcast/WarpcastLoginButton";
 
 export default function ConnectWallet() {
@@ -9,5 +9,5 @@ export default function ConnectWallet() {
         return <WarpcastLoginButton />
     }
 
-    return <PrivyLoginButton />
+    return <TelegramLoginButton />
 }   

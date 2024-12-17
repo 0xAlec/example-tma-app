@@ -1,5 +1,6 @@
 import { useMiniContext } from "@/lib/providers/MiniProvider";
 import WarpcastTransaction from "../warpcast/WarpcastTransaction";
+import TelegramTransaction from "../telegram/TelegramTransaction";
 
 export default function Transaction() {
     const { platform } = useMiniContext();
@@ -8,5 +9,5 @@ export default function Transaction() {
         return <WarpcastTransaction />
     }
 
-    return <>Not implemented</>
+    return <TelegramTransaction />
 }   
