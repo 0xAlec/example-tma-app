@@ -37,7 +37,6 @@ createAppKit({
     socials: ['google'],
     emailShowWallets: true, // default to true
   },
-  allWallets: 'HIDE',
   themeMode: 'light',
 })
 
