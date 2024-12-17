@@ -1,8 +1,8 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import PrivyLoginButton from '@/lib/shared/PrivyLogin';
-import PrivyUser from '@/lib/shared/PrivyUser';
+import PrivyLoginButton from '@/lib/providers/PrivyLogin';
+import PrivyUser from '@/lib/providers/PrivyUser';
 
 
 const User = dynamic(() => import('./components/User'), {

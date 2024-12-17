@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 
 const MiniProvider = dynamic(
-  () => import('@lib/shared/MiniProvider').then(mod => ({ default: mod.MiniProvider })),
+  () => import('@/lib/providers/MiniProvider').then(mod => ({ default: mod.MiniProvider })),
   { ssr: false }
 );
 

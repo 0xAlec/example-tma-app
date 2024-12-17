@@ -1,4 +1,4 @@
-import { useMiniContext } from '@lib/shared/MiniProvider';
+import { useMiniContext } from '@/lib/providers/MiniProvider';
 
 export default function User() {
     const { user, platform } = useMiniContext();

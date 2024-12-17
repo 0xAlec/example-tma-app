@@ -1,12 +1,12 @@
 import { useAccount, useConnect } from 'wagmi'
 
-export default function ConnectWalletButton() {
-  const { address } = useAccount();
+export default function WarpcastLoginButton() {
+  const { address, isConnected } = useAccount();
   const { connect, connectors } = useConnect()
 
   const connector = connectors[0];
 
-  if (address) {
+  if (isConnected && address) {
     return <div>Connected: {address}</div>
   }
 

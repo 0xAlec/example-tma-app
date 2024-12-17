@@ -1,7 +1,7 @@
-import { MiniSDK } from "./sdk"
+import { MiniSDK } from "../config/sdk"
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import ReownProvider from "./ReownProvider"
-import type { MiniUser } from './types';
+import type { MiniUser } from '../config/types';
 import OnchainProviders from "./OnchainProviders";
 import PrivyProviders from "./PrivyProvider";
 
