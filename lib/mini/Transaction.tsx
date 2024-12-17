@@ -1,14 +1,12 @@
-import { useSendTransaction } from "wagmi";
-import { useAccount } from "wagmi";
+import { useMiniContext } from "@/lib/providers/MiniProvider";
+import WarpcastTransaction from "../warpcast/WarpcastTransaction";
 
 export default function Transaction() {
-    const { address } = useAccount();
-    const { sendTransaction } = useSendTransaction();
+    const { platform } = useMiniContext();
 
-    return <button onClick={() => sendTransaction({
-        to: address,
-        value: BigInt(100000000),
-    })} >
-        Transaction
-    </button>;
+    if (platform === 'warpcast') {
+        return <WarpcastTransaction />
+    }
+
+    return <>Not implemented</>
 }   

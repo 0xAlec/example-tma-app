@@ -2,9 +2,11 @@
 
 import dynamic from 'next/dynamic';
 
-import Transaction from '@/lib/mini/Transaction';
-
 const ConnectWallet = dynamic(() => import('@/lib/mini/ConnectWallet'), {
+  ssr: false,
+});
+
+const Transaction = dynamic(() => import('@/lib/mini/Transaction'), {
   ssr: false,
 });
 
