@@ -2,6 +2,8 @@
 
 import dynamic from 'next/dynamic';
 
+import Transaction from '@/lib/mini/Transaction';
+
 const ConnectWallet = dynamic(() => import('@/lib/mini/ConnectWallet'), {
   ssr: false,
 });
@@ -17,6 +19,8 @@ export default function App() {
         <User />
         <br />
         <ConnectWallet />
+        <br />
+        <Transaction />
       </main>
     </div>
   );
