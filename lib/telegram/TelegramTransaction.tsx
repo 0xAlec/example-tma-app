@@ -48,7 +48,8 @@ export default function TelegramTransaction() {
                         try {
                             setTxStatus('pending');
                             const tx = await sendTransaction({
-                                to: '0x6Cd01c0F55ce9E0Bf78f5E90f72b4345b16d515d'
+                                to: embeddedWallet?.address,
+                                value: 100000,
                             });
                             setTxHash(tx.transactionHash);
                             setTxStatus('success');

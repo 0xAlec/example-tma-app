@@ -1,12 +1,13 @@
-import {usePrivy} from '@privy-io/react-auth';
+import {usePrivy, useWallets} from '@privy-io/react-auth';
 
-export default function PrivyLoginButton() {
+export default function TelegramLoginButton() {
   const {ready, authenticated, login} = usePrivy();
-  // Disable login when Privy is not ready or the user is already authenticated
+  const {wallets} = useWallets();
+  const embeddedWallet = wallets.find((wallet) => wallet.walletClientType === 'privy');
   const disableLogin = !ready || (ready && authenticated);
 
   if (authenticated) {
-    return <></>;
+    return <>Connected: {embeddedWallet?.address}</>;
   }
 
   return (
