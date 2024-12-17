@@ -1,6 +1,6 @@
 import { MiniSDK } from "./sdk"
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import PrivyProviders from "./PrivyProvider"
+import ReownProvider from "./ReownProvider"
 import type { MiniUser } from './types';
 
 type MiniSDKContextType = {
@@ -22,7 +22,7 @@ export function useMiniContext() {
 
 const sdk = new MiniSDK();
 
-export function MiniProvider({ children }: { children: React.ReactNode }) {
+export function MiniProvider({ children, cookies }: { children: React.ReactNode, cookies: string | null }) {
     const [user, setUser] = useState<MiniUser | undefined>(undefined);
     const [ready, setReady] = useState(false);
 
@@ -48,7 +48,7 @@ export function MiniProvider({ children }: { children: React.ReactNode }) {
 
     return (
         <MiniSDKContext.Provider value={value}>
-            <PrivyProviders>{children}</PrivyProviders>
+            <ReownProvider cookies={cookies}>{children}</ReownProvider>
         </MiniSDKContext.Provider>
     )
 }

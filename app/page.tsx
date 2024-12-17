@@ -1,6 +1,5 @@
 'use client';
 
-import PrivyLoginButton from '@/lib/shared/PrivyLogin';
 import dynamic from 'next/dynamic';
 
 const User = dynamic(() => import('./components/User'), {
@@ -13,7 +12,7 @@ export default function App() {
       <main className="flex-grow flex flex-col items-center justify-center">
         <User />
         <br />
-        <PrivyLoginButton />
+        <appkit-button />
       </main>
     </div>
   );
