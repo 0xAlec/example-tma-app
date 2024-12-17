@@ -2,7 +2,8 @@
 
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
-import { useAccount, useWriteContract } from 'wagmi';
+import { useWriteContract } from 'wagmi';
+import { useAppKitAccount } from "@reown/appkit/react";
 import { useDisconnect } from '@reown/appkit/react'
 
 
@@ -11,7 +12,7 @@ const User = dynamic(() => import('./components/User'), {
 });
 
 export default function App() {
-  const { address } = useAccount()
+  const { address } = useAppKitAccount()
   const { data, writeContract, status } = useWriteContract()
   const { disconnect } = useDisconnect()
   useEffect(() => {
