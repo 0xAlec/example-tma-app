@@ -1,8 +1,10 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import ConnectWallet from '@/lib/mini/ConnectWallet';
 
+const ConnectWallet = dynamic(() => import('@/lib/mini/ConnectWallet'), {
+  ssr: false,
+});
 
 const User = dynamic(() => import('./components/User'), {
   ssr: false,
