@@ -39,7 +39,6 @@ createAppKit({
   },
   allWallets: 'HIDE',
   themeMode: 'light',
-  coinbasePreference: 'eoaOnly'
 })
 
 function ContextProvider({ children, cookies }: { children: ReactNode; cookies: string | null }) {

@@ -1,6 +1,7 @@
 import { cookieStorage, createStorage } from '@wagmi/core'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import { base } from '@reown/appkit/networks'
+import { coinbaseWallet } from 'wagmi/connectors'
 
 // Get projectId from https://cloud.reown.com
 export const projectId = '906b9d654c7abec20de8377bca38d7f4'
@@ -16,6 +17,12 @@ export const wagmiAdapter = new WagmiAdapter({
   storage: createStorage({
     storage: cookieStorage
   }),
+  connectors: [
+    coinbaseWallet({
+      appName: 'TMA App',
+      preference: 'eoaOnly'
+    })
+  ],
   ssr: true,
   networks,
   projectId
