@@ -35,6 +35,12 @@ export default function TelegramBiometry() {
         return <button onClick={async () => {
             const granted = await biometry.requestAccess();
             setAuthorized(granted);
+            if (granted) {
+                await biometry.updateToken({
+                    reason: 'Store this token!',
+                    token: '1234567890',
+                })
+            }
         }}>Authorize App</button>
     }
 
