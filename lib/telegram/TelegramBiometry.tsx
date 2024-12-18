@@ -37,7 +37,6 @@ export default function TelegramBiometry() {
     return <button onClick={async () => {
         if (biometry.requestAccess.isAvailable()) {
             const granted = await biometry.requestAccess(); // boolean
-            console.log(granted);
         }
     }}>Biometry</button>
 }

@@ -12,7 +12,6 @@ export default function TelegramTransaction() {
     useEffect(() => {
         const initialize = async () => {
             const provider = await embeddedWallet?.getEthereumProvider();
-            console.log(provider);
             setProvider(provider);
         }
         if (!provider) {

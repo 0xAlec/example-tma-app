@@ -10,7 +10,6 @@ export default function Auth() {
     }
 
     return <button onClick={() => {
-        console.log(window.location.origin);
         openLink(`${window.location.origin}/auth`)
     }}>Auth</button>;
 }
