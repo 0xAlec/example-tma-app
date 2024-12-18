@@ -7,6 +7,7 @@ const console = eruda.get('console')
 export default function TelegramBiometry() {
     const [biometryMounted, setBiometryMounted] = useState(false);
     const [authorized, setAuthorized] = useState(false);
+    const [token, setToken] = useState('');
 
     useEffect(() => {
         const mountBiometry = async () => {
@@ -33,16 +34,17 @@ export default function TelegramBiometry() {
 
     if (!authorized) {
         return <button onClick={async () => {
-            const granted = await biometry.requestAccess();
+            const granted = await biometry.requestAccess({
+                reason: 'Authorize App',
+            });
             setAuthorized(granted);
-            if (granted) {
-                await biometry.updateToken({
-                    reason: 'Store this token!',
-                    token: '1234567890',
-                })
-            }
         }}>Authorize App</button>
     }
+
+    if (token) {
+        return <>Token: {token}</>
+    }
+
 
     return <button onClick={async () => {
         if (!biometry.authenticate.isAvailable()) {
@@ -56,6 +58,15 @@ export default function TelegramBiometry() {
 
         if (status === 'authorized') {
             console.log(`Authorized. Token: ${token}`);
+            if (!token) {
+                await biometry.updateToken({
+                    reason: 'Store this token!',
+                    token: 'some-private-key',
+                })
+                setToken('some-private-key');
+            } else {
+                setToken(token);
+            }
           } else {
             console.log('Not authorized');
         }   
