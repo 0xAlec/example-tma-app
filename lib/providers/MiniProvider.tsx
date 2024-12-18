@@ -59,7 +59,7 @@ export function MiniProvider({ children }: { children: React.ReactNode }) {
     if (value.platform === 'telegram') {
         return (
             <MiniSDKContext.Provider value={value}>
-                <OnchainProviders>{children}</OnchainProviders>
+                <ReownProvider cookies={null}>{children}</ReownProvider>
             </MiniSDKContext.Provider>
         )
     }

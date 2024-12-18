@@ -30,7 +30,7 @@ createAppKit({
   networks: [base],
   defaultNetwork: base,
   metadata: metadata,
-//   featuredWalletIds: ['fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa'],
+  featuredWalletIds: ['fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa'],
   features: {
     analytics: false, // Optional - defaults to your Cloud configuration
     email: false, // default to true

@@ -8,6 +8,9 @@ export default function ConnectWallet() {
     if (platform === 'warpcast') {
         return <WarpcastLoginButton />
     }
+    if (platform === 'telegram') {
+        return <appkit-connect-button />
+    }
 
     return <TelegramLoginButton />
 }   
