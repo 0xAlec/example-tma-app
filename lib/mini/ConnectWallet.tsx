@@ -2,10 +2,12 @@ import { useMiniContext } from "@/lib/providers/MiniProvider";
 import TelegramLoginButton from "../telegram/TelegramLoginButton";
 import WarpcastLoginButton from "../warpcast/WarpcastLoginButton";
 import { useDisconnect } from '@reown/appkit/react'
+import { useAccount } from "wagmi";
 
 export default function ConnectWallet() {
     const { platform } = useMiniContext();
     const { disconnect } = useDisconnect();
+    const { isConnected } = useAccount();
 
     if (platform === 'warpcast') {
         return <WarpcastLoginButton />
@@ -14,7 +16,7 @@ export default function ConnectWallet() {
         return (
             <>
                 <appkit-button />
-                <button onClick={() => disconnect()}>Disconnect</button>
+                {isConnected && <button onClick={() => disconnect()}>Disconnect</button>}
             </>
         )
     }
