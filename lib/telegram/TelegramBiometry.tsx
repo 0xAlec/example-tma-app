@@ -11,12 +11,15 @@ export default function TelegramBiometry() {
 
         const mountBiometry = async () => {
 
+            console.log('Is biometry supported?', biometry.isSupported());
+
             if (!biometry.isSupported()) {
                 console.log('Biometry is not supported');
                 return;
             }
 
-            if (biometry.isAvailable()) {
+            if (biometry.mount.isAvailable()) {
+                console.log('Mounting biometry');
                 await biometry.mount();
                 setBiometryMounted(true);
             }
