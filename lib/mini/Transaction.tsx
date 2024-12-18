@@ -9,9 +9,9 @@ export default function Transaction() {
     if (platform === 'warpcast') {
         return <WarpcastTransaction />
     }
-    if (platform === 'telegram') {
-        return <WagmiTransaction />
-    }
+    // if (platform === 'telegram') {
+    //     return <WagmiTransaction />
+    // }
 
     return <TelegramTransaction />
 }   

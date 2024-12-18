@@ -56,13 +56,13 @@ export function MiniProvider({ children }: { children: React.ReactNode }) {
         )
     }
 
-    if (value.platform === 'telegram') {
-        return (
-            <MiniSDKContext.Provider value={value}>
-                <ReownProvider cookies={null}>{children}</ReownProvider>
-            </MiniSDKContext.Provider>
-        )
-    }
+    // if (value.platform === 'telegram') {
+    //     return (
+    //         <MiniSDKContext.Provider value={value}>
+    //             <ReownProvider cookies={null}>{children}</ReownProvider>
+    //         </MiniSDKContext.Provider>
+    //     )
+    // }
 
     return (
         <MiniSDKContext.Provider value={value}>

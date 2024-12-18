@@ -14,7 +14,7 @@ const User = dynamic(() => import('./components/User'), {
   ssr: false,
 });
 
-const Redirect = dynamic(() => import('./components/Redirect'), {
+const Auth = dynamic(() => import('./components/Auth'), {
   ssr: false,
 });
 
@@ -28,7 +28,7 @@ export default function App() {
         <br />
         <Transaction />
         <br />
-        <Redirect />
+        <Auth />
       </main>
     </div>
   );
