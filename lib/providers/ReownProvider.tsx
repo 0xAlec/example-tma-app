@@ -38,6 +38,7 @@ createAppKit({
     emailShowWallets: true, // default to true
   },
   themeMode: 'light',
+  coinbasePreference: 'eoaOnly'
 })
 
 function ContextProvider({ children, cookies }: { children: ReactNode; cookies: string | null }) {
