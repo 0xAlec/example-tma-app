@@ -6,7 +6,6 @@ const console = eruda.get('console')
 
 export default function TelegramBiometry() {
     const [biometryMounted, setBiometryMounted] = useState(false);
-    const [authorized, setAuthorized] = useState(false);
     const [token, setToken] = useState('');
 
     useEffect(() => {
@@ -32,12 +31,11 @@ export default function TelegramBiometry() {
         return <>Biometry mounting...</>
     }
 
-    if (!authorized) {
+    if (biometry.requestAccess.isAvailable()) {
         return <button onClick={async () => {
-            const granted = await biometry.requestAccess({
+            await biometry.requestAccess({
                 reason: 'Authorize App',
             });
-            setAuthorized(granted);
         }}>Authorize App</button>
     }
 
