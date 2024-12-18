@@ -16,7 +16,7 @@ export default function ConnectWallet() {
         return (
             <>
                 <appkit-button />
-                {isConnected && <button onClick={() => disconnect()}>Disconnect</button>}
+                <button onClick={() => disconnect()}>Disconnect</button>
             </>
         )
     }
