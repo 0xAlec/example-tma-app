@@ -14,10 +14,7 @@ export default function ConnectWallet() {
     }
     if (platform === 'telegram') {
         return (
-            <>
-                <appkit-button />
-                <button onClick={() => disconnect()}>Disconnect</button>
-            </>
+            <></>
         )
     }
 
