@@ -3,10 +3,26 @@ import { useState, useRef } from 'react';
 export default function MiniKitAuth() {
   const [showIframe, setShowIframe] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [randomString] = useState(() => Math.random().toString(36).substring(7));
 
-  const sendMessage = () => {
-    if (iframeRef.current?.contentWindow) {
-      iframeRef.current.contentWindow.postMessage('Hello World!', 'https://minikit-auth.vercel.app/');
+  const sendAuthRequest = async () => {
+    try {
+      const response = await fetch('https://minikit-auth.vercel.app/api/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ randomString }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Auth request failed');
+      }
+      
+      const data = await response.json();
+      console.log('Auth response:', data);
+    } catch (error) {
+      console.error('Auth request error:', error);
     }
   };
 
@@ -38,11 +54,11 @@ export default function MiniKitAuth() {
             </button>
             <iframe 
               ref={iframeRef}
-              src="https://minikit-auth.vercel.app/"
+              src={`https://minikit-auth.vercel.app/?call_id=${randomString}`}
               className="w-full h-full border-none"
               style={{ margin: 0, padding: 0 }}
               allow="camera; microphone; payment"
-              onLoad={sendMessage}
+              onLoad={sendAuthRequest}
             />
           </div>
         </div>
