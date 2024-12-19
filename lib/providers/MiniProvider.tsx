@@ -1,15 +1,13 @@
 import { MiniSDK } from "../config/sdk"
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import ReownProvider from "./ReownProvider"
 import type { MiniUser } from '../config/types';
 import OnchainProviders from "./OnchainProviders";
-import PrivyProviders from "./PrivyProvider";
 
 type MiniSDKContextType = {
     platform: string | undefined;
     user: MiniUser | undefined;
-    // getUser: () => Promise<MiniUser | undefined>;
     openLink: (url: string) => void;
+    initData: string | undefined;
 }
 
 export const MiniSDKContext = createContext<MiniSDKContextType | null>(null)
@@ -45,7 +43,8 @@ export function MiniProvider({ children }: { children: React.ReactNode }) {
     const value = useMemo(() => ({
         platform: sdk.GetPlatform(),
         user,
-        openLink: (url: string) => sdk.OpenLink(url)
+        openLink: (url: string) => sdk.OpenLink(url),
+        initData: sdk.initDataRaw
     }), [user])
 
     if (value.platform === 'warpcast') {
@@ -55,14 +54,6 @@ export function MiniProvider({ children }: { children: React.ReactNode }) {
             </MiniSDKContext.Provider>
         )
     }
-
-    // if (value.platform === 'telegram') {
-    //     return (
-    //         <MiniSDKContext.Provider value={value}>
-    //             <ReownProvider cookies={null}>{children}</ReownProvider>
-    //         </MiniSDKContext.Provider>
-    //     )
-    // }
 
     return (
         <MiniSDKContext.Provider value={value}>

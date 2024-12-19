@@ -14,6 +14,7 @@ const console = eruda.get('console');
 
 export class MiniSDK {
   private platform: 'telegram' | 'warpcast' | 'unknown' = 'unknown';
+  public initDataRaw: string | undefined;
 
   constructor() {}
 
@@ -22,6 +23,8 @@ export class MiniSDK {
     try {
       init();
       this.platform = 'telegram';
+      const { initDataRaw } = retrieveLaunchParams();
+      this.initDataRaw = initDataRaw;
       if (miniApp.mount.isAvailable()) {
         miniApp.mount();
         miniApp.isMounted();
