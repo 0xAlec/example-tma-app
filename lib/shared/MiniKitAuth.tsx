@@ -1,7 +1,14 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export default function MiniKitAuth() {
   const [showIframe, setShowIframe] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  const sendMessage = () => {
+    if (iframeRef.current?.contentWindow) {
+      iframeRef.current.contentWindow.postMessage('Hello World!', 'https://minikit-auth.vercel.app/');
+    }
+  };
 
   return (
     <div className="relative">
@@ -30,10 +37,12 @@ export default function MiniKitAuth() {
               ✕
             </button>
             <iframe 
+              ref={iframeRef}
               src="https://minikit-auth.vercel.app/"
               className="w-full h-full border-none"
               style={{ margin: 0, padding: 0 }}
               allow="camera; microphone; payment"
+              onLoad={sendMessage}
             />
           </div>
         </div>
