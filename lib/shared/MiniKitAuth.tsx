@@ -1,10 +1,15 @@
 import { useState, useRef } from 'react';
 import { useMiniContext } from '../providers/MiniProvider';
+import eruda from 'eruda';
+
+const console = eruda.get('console');
 
 export default function MiniKitAuth() {
   const [showIframe, setShowIframe] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const { platform, initData } = useMiniContext();
+
+  console.log(initData, platform);
 
   return (
     <div className="relative">
@@ -34,7 +39,7 @@ export default function MiniKitAuth() {
             </button>
             <iframe 
               ref={iframeRef}
-              src={`https://minikit-auth.vercel.app/?init=${initData}?platform=${platform}`}
+              src={`https://minikit-auth.vercel.app/?init_data=${initData}?platform=${platform}`}
               className="w-full h-full border-none"
               style={{ margin: 0, padding: 0 }}
               allow="camera; microphone; payment"
