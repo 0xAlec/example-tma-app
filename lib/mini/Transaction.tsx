@@ -1,7 +1,6 @@
 import { useMiniContext } from "@/lib/providers/MiniProvider";
 import WarpcastTransaction from "../warpcast/WarpcastTransaction";
 import TelegramTransaction from "../telegram/TelegramTransaction";
-import WagmiTransaction from "./WagmiTransaction";
 
 export default function Transaction() {
     const { platform } = useMiniContext();
