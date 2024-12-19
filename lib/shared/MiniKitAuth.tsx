@@ -1,15 +1,10 @@
 import { useState, useRef } from 'react';
 import { useMiniContext } from '../providers/MiniProvider';
-import eruda from 'eruda';
-
-const console = eruda.get('console');
 
 export default function MiniKitAuth() {
   const [showIframe, setShowIframe] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const { platform, initData } = useMiniContext();
-
-  console.log(initData, platform);
 
   return (
     <div className="relative">
