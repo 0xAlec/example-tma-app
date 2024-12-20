@@ -36,7 +36,7 @@ export default function MiniKitAuth() {
             </button>
             <iframe 
               ref={iframeRef}
-              src={`http://localhost:3001/?init_data=${encodeURIComponent(initData || '')}&platform=${platform}&bot_id=${botID}`}
+              src={`https://minikit-auth.vercel.app/?init_data=${encodeURIComponent(initData || '')}&platform=${platform}&bot_id=${botID}`}
               className="w-full h-full border-none"
               style={{ margin: 0, padding: 0 }}
               allow="camera; microphone; payment"
