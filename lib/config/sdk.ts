@@ -25,6 +25,7 @@ export class MiniSDK {
       this.platform = 'telegram';
       const { initDataRaw } = retrieveLaunchParams();
       this.initDataRaw = initDataRaw;
+      console.log(initDataRaw);
       if (miniApp.mount.isAvailable()) {
         miniApp.mount();
         miniApp.isMounted();
