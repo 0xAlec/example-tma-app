@@ -16,13 +16,13 @@ export default function MiniKitTransaction() {
 
             {showIframe && (
                 <div 
-                className="fixed inset-0 z-[9999] flex items-end justify-center bg-black/50"
+                className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50"
                 onClick={(e) => {
                 if (e.target === e.currentTarget) setShowIframe(false);
                 }}
                 >
                 <div 
-                className="absolute w-full h-1/2 overflow-hidden"
+                className="absolute w-full h-full overflow-hidden"
                 style={{ margin: 0 }}
                 >
                 <button 
@@ -32,15 +32,14 @@ export default function MiniKitTransaction() {
                     ✕
                 </button>
                 <iframe 
-                    src={`https://minikit-auth.vercel.app/transaction?data=${transactionString}`}
+                    src={`http://localhost:3001/transaction?data=${transactionString}`}
                     title="Transaction Interface"
                     width="100%"
-                    height="500px"
+                    height="100%"
                     style={{ border: 'none' }}
                 />
                 </div>
                 </div>
-                
             )}
         </div>
     )
