@@ -1,7 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function MiniKitTransaction() {
     const [showIframe, setShowIframe] = useState(false);
+
+    // Add useEffect to handle iframe messages
+    useEffect(() => {
+        const handleMessage = (event: MessageEvent) => {
+            console.log('Received message from iframe:', event.data);
+            // TODO: Verify origin in production
+            if (event.data.type === 'CLOSE_IFRAME') {
+                setShowIframe(false);
+            }
+        };
+
+        window.addEventListener('message', handleMessage);
+
+        // Cleanup listener on component unmount
+        return () => {
+            window.removeEventListener('message', handleMessage);
+        };
+    }, []);
+
     const transaction = {
         to: '0x0000000000000000000000000000000000000000',
         value: '100000'
