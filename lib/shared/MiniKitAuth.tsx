@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useMiniContext } from '../providers/MiniProvider';
 
 export default function MiniKitAuth() {
@@ -7,14 +7,6 @@ export default function MiniKitAuth() {
   const { platform, initData } = useMiniContext();
   
   const botID = '7845021044';
-  const [buttonText, setButtonText] = useState('No stored value found');
-  
-  useEffect(() => {
-    const storedValue = localStorage.getItem('randomValue');
-    if (storedValue) {
-      setButtonText(storedValue);
-    }
-  }, []);
 
   return (
     <div className="relative">
@@ -22,7 +14,7 @@ export default function MiniKitAuth() {
         onClick={() => setShowIframe(true)}
         className="bg-blue-600 border border-blue-700 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer"
       >
-        {buttonText}
+        {'Login'}
       </button>
 
       {showIframe && (

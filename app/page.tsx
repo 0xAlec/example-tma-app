@@ -2,19 +2,15 @@
 
 import dynamic from 'next/dynamic';
 
-const ConnectWallet = dynamic(() => import('@/lib/mini/ConnectWallet'), {
-  ssr: false,
-});
-
-const Transaction = dynamic(() => import('@/lib/mini/Transaction'), {
-  ssr: false,
-});
-
 const User = dynamic(() => import('./components/User'), {
   ssr: false,
 });
 
 const Auth = dynamic(() => import('./components/Auth'), {
+  ssr: false,
+});
+
+const Transaction = dynamic(() => import('./components/Transaction'), {
   ssr: false,
 });
 
@@ -24,11 +20,9 @@ export default function App() {
       <main className="flex-grow flex flex-col items-center justify-center">
         <User />
         <br />
-        <ConnectWallet />
+        <Auth />
         <br />
         <Transaction />
-        <br />
-        <Auth />
       </main>
     </div>
   );
