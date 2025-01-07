@@ -32,7 +32,7 @@ export default function MiniKitTransaction() {
                     ✕
                 </button>
                 <iframe 
-                    src={`http://localhost:3001/transaction?data=${transactionString}`}
+                    src={`https://minikit-auth.vercel.app/transaction?data=${transactionString}`}
                     title="Transaction Interface"
                     width="100%"
                     height="100%"
