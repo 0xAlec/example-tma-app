@@ -11,6 +11,24 @@ export default function MiniKitAuth() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const { platform, initData } = useMiniContext();
 
+  // Add useEffect to handle iframe messages
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+        console.log('Received message from iframe:', event.data);
+        // TODO: Verify origin in production
+        if (event.data.type === 'CLOSE_IFRAME') {
+            setShowIframe(false);
+        }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    // Cleanup listener on component unmount
+    return () => {
+        window.removeEventListener('message', handleMessage);
+    };
+}, []);
+
   useEffect(() => {
     console.log(initData);
     if (initData) {
