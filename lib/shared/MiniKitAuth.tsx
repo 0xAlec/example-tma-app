@@ -9,7 +9,7 @@ export default function MiniKitAuth() {
   const botID = '7845021044';
 
   return (
-    <div>
+    <div className="relative">
       {showIframe && (
         <div 
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50"
