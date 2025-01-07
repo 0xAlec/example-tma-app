@@ -2,30 +2,23 @@ import { useState, useRef } from 'react';
 import { useMiniContext } from '../providers/MiniProvider';
 
 export default function MiniKitAuth() {
-  const [showIframe, setShowIframe] = useState(false);
+  const [showIframe, setShowIframe] = useState(true);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const { platform, initData } = useMiniContext();
   
   const botID = '7845021044';
 
   return (
-    <div className="relative">
-      <button 
-        onClick={() => setShowIframe(true)}
-        className="bg-blue-600 border border-blue-700 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer"
-      >
-        {'Login'}
-      </button>
-
+    <div>
       {showIframe && (
         <div 
-          className="fixed inset-0 z-[9999] flex items-end justify-center bg-black/50"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50"
           onClick={(e) => {
             if (e.target === e.currentTarget) setShowIframe(false);
           }}
         >
           <div 
-            className="absolute w-full h-1/2 overflow-hidden"
+            className="absolute w-full h-full overflow-hidden"
             style={{ margin: 0 }}
           >
             <button 
