@@ -1,10 +1,22 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useMiniContext } from '../providers/MiniProvider';
+import eruda from 'eruda';
+
+eruda.init();
+
+const console = eruda.get('console');
 
 export default function MiniKitAuth() {
-  const [showIframe, setShowIframe] = useState(true);
+  const [showIframe, setShowIframe] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const { platform, initData } = useMiniContext();
+
+  useEffect(() => {
+    console.log(initData);
+    if (initData) {
+      setShowIframe(true);
+    }
+  }, [initData]);
   
   const botID = '7845021044';
 
