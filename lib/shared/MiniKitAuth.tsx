@@ -10,6 +10,7 @@ const console = eruda.get('console');
 
 export default function MiniKitAuth() {
   const [showIframe, setShowIframe] = useState(false);
+  const [signature, setSignature] = useState<string>();
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const { platform, initData } = useMiniContext();
 
@@ -35,18 +36,31 @@ export default function MiniKitAuth() {
       if (platform === 'telegram' && initData) {
         setShowIframe(true);
       }
+      if (platform === 'warpcast') {
+        const signature = await sdk.actions.signIn({ nonce: generateNonce() })
+        console.log('warpcast message', signature);
+        setSignature(signature.signature);
+      }
     }
     signIn();
   }, [initData, platform]);
   
   const botID = '7845021044';
 
-  if (platform === 'warpcast') {
+  // if (platform === 'warpcast') {
+  //   return (
+  //     <button onClick={async () => {
+  //       const message = await sdk.actions.signIn({ nonce: generateNonce() })
+  //       console.log('warpcast message', message);
+  //     }}>Sign in with Warpcast</button>
+  //   )
+  // }
+
+  if (platform === 'warpcast' && signature) {
     return (
-      <button onClick={async () => {
-        const message = await sdk.actions.signIn({ nonce: generateNonce() })
-        console.log('warpcast message', message);
-      }}>Sign in with Warpcast</button>
+      <div>
+        <span>Signature: {signature}</span>
+      </div>
     )
   }
 
