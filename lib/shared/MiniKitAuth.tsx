@@ -41,6 +41,7 @@ export default function MiniKitAuth() {
 }, []);
 
   useEffect(() => {
+    console.log('platform', platform);    
     const signIn = async () => {
       if (platform === 'telegram' && initData) {
         setShowIframe(true);
