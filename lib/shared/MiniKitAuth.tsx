@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useMiniContext } from '../providers/MiniProvider';
 import eruda from 'eruda';
 import sdk from '@farcaster/frame-sdk';
+import { generateNonce } from 'siwe'
 
 eruda.init();
 
@@ -35,7 +36,7 @@ export default function MiniKitAuth() {
         setShowIframe(true);
       }
       if (platform === 'warpcast') {
-        const message = await sdk.actions.signIn({ nonce: '123' })
+        const message = await sdk.actions.signIn({ nonce: generateNonce() })
         console.log('warpcast message', message);
       }
     }
