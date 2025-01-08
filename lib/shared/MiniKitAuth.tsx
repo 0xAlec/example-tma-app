@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useMiniContext } from '../providers/MiniProvider';
 import eruda from 'eruda';
+import sdk from '@farcaster/frame-sdk';
 
 eruda.init();
 
@@ -30,11 +31,17 @@ export default function MiniKitAuth() {
 }, []);
 
   useEffect(() => {
-    console.log(initData);
-    if (initData) {
-      setShowIframe(true);
+    const signIn = async () => {
+      if (platform === 'telegram' && initData) {
+        setShowIframe(true);
+      }
+      if (platform === 'farcaster' && initData) {
+        const message = await sdk.actions.signIn({ nonce: '123' })
+        console.log(message);
+      }
     }
-  }, [initData]);
+    signIn();
+  }, [initData, platform]);
   
   const botID = '7845021044';
 

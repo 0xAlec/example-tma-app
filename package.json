@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@coinbase/onchainkit": "latest",
-    "@farcaster/frame-sdk": "^0.0.16",
+    "@farcaster/frame-sdk": "^0.0.26",
     "@privy-io/react-auth": "^1.97.0",
     "@reown/appkit": "^1.6.0",
     "@reown/appkit-adapter-wagmi": "^1.6.0",
