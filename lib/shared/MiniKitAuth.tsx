@@ -3,6 +3,7 @@ import { useMiniContext } from '../providers/MiniProvider';
 import eruda from 'eruda';
 import sdk from '@farcaster/frame-sdk';
 import { generateNonce } from 'siwe'
+import type { Context } from '@farcaster/frame-sdk';
 
 eruda.init();
 
@@ -16,10 +17,10 @@ export default function MiniKitAuth() {
     nonce: string;
   }>();
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const { platform, initData } = useMiniContext();
+  const { platform, initData, user } = useMiniContext();
   const botID = '7845021044';
   const platformParams = platform === 'warpcast' 
-    ? `&nonce=${encodeURIComponent(result?.nonce || '')}&message=${encodeURIComponent(result?.message || '')}&signature=${encodeURIComponent(result?.signature || '')}` 
+    ? `&nonce=${encodeURIComponent(result?.nonce || '')}&message=${encodeURIComponent(result?.message || '')}&signature=${encodeURIComponent(result?.signature || '')}&photo_url=${encodeURIComponent((user as Context.FrameContext)?.user.pfpUrl || '')}&username=${encodeURIComponent((user as Context.FrameContext)?.user.username || '')}` 
     : `&init_data=${encodeURIComponent(initData || '')}`;
 
   // Add useEffect to handle iframe messages
