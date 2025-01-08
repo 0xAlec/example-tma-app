@@ -15,7 +15,6 @@ export default function MiniKitAuth() {
   // Add useEffect to handle iframe messages
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-        console.log('Received message from iframe:', event.data);
         // TODO: Verify origin in production
         if (event.data.type === 'CLOSE_IFRAME') {
             setShowIframe(false);
@@ -35,9 +34,9 @@ export default function MiniKitAuth() {
       if (platform === 'telegram' && initData) {
         setShowIframe(true);
       }
-      if (platform === 'warpcast' && initData) {
+      if (platform === 'warpcast') {
         const message = await sdk.actions.signIn({ nonce: '123' })
-        console.log(message);
+        console.log('warpcast message', message);
       }
     }
     signIn();
