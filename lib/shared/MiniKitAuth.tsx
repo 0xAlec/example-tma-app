@@ -19,9 +19,6 @@ export default function MiniKitAuth() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const { platform, initData, user } = useMiniContext();
   const botID = '7845021044';
-  const platformParams = platform === 'warpcast' 
-    ? `&nonce=${encodeURIComponent(result?.nonce || '')}&message=${encodeURIComponent(result?.message || '')}&signature=${encodeURIComponent(result?.signature || '')}&photo_url=${encodeURIComponent((user as Context.FrameContext)?.user.pfpUrl || '')}&username=${encodeURIComponent((user as Context.FrameContext)?.user.username || '')}` 
-    : `&init_data=${encodeURIComponent(initData || '')}`;
 
   // Add useEffect to handle iframe messages
   useEffect(() => {
@@ -41,7 +38,6 @@ export default function MiniKitAuth() {
 }, []);
 
   useEffect(() => {
-    console.log('platform', platform);    
     const signIn = async () => {
       if (platform === 'telegram' && initData) {
         setShowIframe(true);
@@ -82,7 +78,11 @@ export default function MiniKitAuth() {
             </button>
             <iframe 
               ref={iframeRef}
-              src={`https://minikit-auth.vercel.app/?platform=${platform}&bot_id=${botID}${platformParams}`}
+              src={`https://minikit-auth.vercel.app/?platform=${platform}&bot_id=${botID}${
+                platform === 'warpcast'
+                  ? `&nonce=${encodeURIComponent(result?.nonce || '')}&message=${encodeURIComponent(result?.message || '')}&signature=${encodeURIComponent(result?.signature || '')}&photo_url=${encodeURIComponent((user as Context.FrameContext)?.user.pfpUrl || '')}&username=${encodeURIComponent((user as Context.FrameContext)?.user.username || '')}`
+                  : `&init_data=${encodeURIComponent(initData || '')}`
+              }`}
               className="w-full h-full border-none"
               style={{ margin: 0, padding: 0 }}
               allow="camera; microphone; payment"
