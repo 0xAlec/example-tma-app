@@ -1,12 +1,20 @@
 import { useState, useEffect } from 'react';
+import eruda from 'eruda';
+
+eruda.init();
+
+const console = eruda.get('console');
 
 export default function MiniKitTransaction() {
     const [showIframe, setShowIframe] = useState(false);
+    const [hash, setHash] = useState('');
 
     // Add useEffect to handle iframe messages
     useEffect(() => {
         const handleMessage = (event: MessageEvent) => {
-            console.log('Received message from iframe:', event.data);
+            if (event.data.type === 'TRANSACTION_SUCCESS') {
+                setHash(event.data.hash);
+            }
             // TODO: Verify origin in production
             if (event.data.type === 'CLOSE_IFRAME') {
                 setShowIframe(false);
@@ -26,6 +34,20 @@ export default function MiniKitTransaction() {
         value: '100000'
     }
     const transactionString = new URLSearchParams(JSON.stringify(transaction)).toString();
+
+    if (hash) {
+        return (
+            <div className="flex flex-col items-center text-sm">
+                <span>Transaction successful!</span>
+                <button 
+                    onClick={() => window.open(`https://sepolia.basescan.org/tx/${hash}`, '_blank')}
+                    className="bg-blue-600 border border-blue-700 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer mt-2"
+                >
+                    View on Etherscan
+                </button>
+            </div>
+        );
+    }
 
     return (
         <div>
