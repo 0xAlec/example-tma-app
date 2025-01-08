@@ -35,15 +35,20 @@ export default function MiniKitAuth() {
       if (platform === 'telegram' && initData) {
         setShowIframe(true);
       }
-      if (platform === 'warpcast') {
-        const message = await sdk.actions.signIn({ nonce: generateNonce() })
-        console.log('warpcast message', message);
-      }
     }
     signIn();
   }, [initData, platform]);
   
   const botID = '7845021044';
+
+  if (platform === 'warpcast') {
+    return (
+      <button onClick={async () => {
+        const message = await sdk.actions.signIn({ nonce: generateNonce() })
+        console.log('warpcast message', message);
+      }}>Sign in with Warpcast</button>
+    )
+  }
 
   return (
     <div className="relative">
