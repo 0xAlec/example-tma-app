@@ -35,7 +35,7 @@ export default function MiniKitAuth() {
       if (platform === 'telegram' && initData) {
         setShowIframe(true);
       }
-      if (platform === 'farcaster' && initData) {
+      if (platform === 'warpcast' && initData) {
         const message = await sdk.actions.signIn({ nonce: '123' })
         console.log(message);
       }
