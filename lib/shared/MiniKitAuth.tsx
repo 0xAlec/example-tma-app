@@ -13,13 +13,13 @@ export default function MiniKitAuth() {
   const [result, setResult] = useState<{
     signature: string;
     message: string;
+    nonce: string;
   }>();
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const { platform, initData } = useMiniContext();
-  const nonce = generateNonce();
   const botID = '7845021044';
   const platformParams = platform === 'warpcast' 
-    ? `&nonce=${encodeURIComponent(nonce)}&message=${encodeURIComponent(result?.message || '')}&signature=${encodeURIComponent(result?.signature || '')}` 
+    ? `&nonce=${encodeURIComponent(result?.nonce || '')}&message=${encodeURIComponent(result?.message || '')}&signature=${encodeURIComponent(result?.signature || '')}` 
     : `&init_data=${encodeURIComponent(initData || '')}`;
 
   // Add useEffect to handle iframe messages
@@ -45,19 +45,18 @@ export default function MiniKitAuth() {
         setShowIframe(true);
       }
       if (platform === 'warpcast') {
+        const nonce = generateNonce();
         const result = await sdk.actions.signIn({ nonce })
-        setResult(result);
+        setResult({ nonce, message: result.message, signature: result.signature });
       }
     }
     signIn();
-  }, [initData, platform, nonce]);
+  }, [initData, platform]);
 
   useEffect(() => {
     if (!result) return;
-    
-    console.log('result', platformParams);
     setShowIframe(true);
-  }, [result, platformParams]);
+  }, [result]);
 
 
   return (
