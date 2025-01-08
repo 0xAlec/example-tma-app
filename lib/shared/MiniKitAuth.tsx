@@ -10,9 +10,13 @@ const console = eruda.get('console');
 
 export default function MiniKitAuth() {
   const [showIframe, setShowIframe] = useState(false);
-  const [signature, setSignature] = useState<string>();
+  const [result, setResult] = useState<{
+    signature: string;
+    message: string;
+  }>();
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const { platform, initData } = useMiniContext();
+  const nonce = generateNonce();
 
   // Add useEffect to handle iframe messages
   useEffect(() => {
@@ -37,15 +41,18 @@ export default function MiniKitAuth() {
         setShowIframe(true);
       }
       if (platform === 'warpcast') {
-        const signature = await sdk.actions.signIn({ nonce: generateNonce() })
-        console.log('warpcast message', signature);
-        setSignature(signature.signature);
+        const result = await sdk.actions.signIn({ nonce })
+        setResult(result);
+        setShowIframe(true);
       }
     }
     signIn();
-  }, [initData, platform]);
+  }, [initData, platform, nonce]);
   
   const botID = '7845021044';
+  const platformParams = platform === 'warpcast' 
+    ? `&nonce=${encodeURIComponent(nonce)}&message=${encodeURIComponent(result?.message || '')}&signature=${encodeURIComponent(result?.signature || '')}` 
+    : `&init_data=${encodeURIComponent(initData || '')}`;
 
   // if (platform === 'warpcast') {
   //   return (
@@ -55,14 +62,6 @@ export default function MiniKitAuth() {
   //     }}>Sign in with Warpcast</button>
   //   )
   // }
-
-  if (platform === 'warpcast' && signature) {
-    return (
-      <div>
-        <span>Signature: {signature}</span>
-      </div>
-    )
-  }
 
   return (
     <div className="relative">
@@ -85,7 +84,7 @@ export default function MiniKitAuth() {
             </button>
             <iframe 
               ref={iframeRef}
-              src={`https://minikit-auth.vercel.app/?init_data=${encodeURIComponent(initData || '')}&platform=${platform}&bot_id=${botID}`}
+              src={`https://minikit-auth.vercel.app/?platform=${platform}&bot_id=${botID}${platformParams}`}
               className="w-full h-full border-none"
               style={{ margin: 0, padding: 0 }}
               allow="camera; microphone; payment"
